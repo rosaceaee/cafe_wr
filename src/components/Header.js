@@ -4,7 +4,7 @@ import {
   Switch,
   Routes,
   Route,
-  Link
+  Link,
 } from "react-router-dom";
 import Asdf from "../Asdf";
 import posts from "../list.json";
@@ -40,7 +40,7 @@ https://www.makeuseof.com/react-search-bar-filters-data-create/
 const Header = () => {
   const [state, setstate] = useState({
     query: "",
-    list: []
+    list: [],
   });
   const checkVal = (e) => {
     // setaa(e.target.value);
@@ -50,7 +50,7 @@ const Header = () => {
     });
     setstate({
       query: e.target.value,
-      list: results
+      list: results,
     });
   };
 
@@ -85,7 +85,7 @@ const Header = () => {
 
           <div className="pick-con">
             <div>
-              <Link to="/babyfriendly">응애</Link>
+              <Link to="/babyfriendly">ㅋㅋㅋ응애</Link>
             </div>
             <div>
               <Link to="/">솔로</Link>
