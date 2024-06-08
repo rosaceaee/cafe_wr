@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Button, Space, DatePicker, version } from "antd";
+import { Button, Space, DatePicker, version, Col, Row } from "antd";
 import { Link, useNavigate } from "react-router-dom";
+
+import Result from "./Result";
+
 import "../style/common.scss";
 
 const Main = () => {
@@ -36,19 +39,14 @@ const Main = () => {
       setSet(true);
     }
   };
+
+  const transfer = [set, setSet, bind, setBind];
+
   return (
     <>
       {set ? (
         <>
-          {bind.map((a, b) => {
-            return (
-              <>
-                <Button type="primary" key={b}>
-                  {a.answer}
-                </Button>
-              </>
-            );
-          })}
+          <Result transfer={transfer} />
         </>
       ) : (
         <>
