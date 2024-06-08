@@ -1,46 +1,77 @@
 import React, { useState, useEffect } from "react";
+import { Button, Space, DatePicker, version } from "antd";
 import { Link, useNavigate } from "react-router-dom";
-import Header from "../components/Header";
-import SummaryWordBox from "../components/SummaryWordBox";
-import list from "../list";
 import "../style/common.scss";
-import SignIn from "./SignIn";
-import Wrapper from "../components/Wrapper";
 
 const Main = () => {
-  const [asdf, setasdf] = React.useState([]);
+  // const [asdf, setasdf] = useState([]);
+  const [num, setNum] = useState(0);
+  const [set, setSet] = useState(false);
+  const [bind, setBind] = useState([]);
 
-  React.useEffect(() => {
-    // setTimeout() simulates the time needed to fetch the data from the api
-    setTimeout(() => {
-      setasdf(list);
-    }, 1000);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setasdf(list);
+  //   }, 1000);
+  // }, []);
 
+  const survey = [
+    {
+      question: "인원 수를 알려주세요!",
+      answers: ["혼자", "두 명 이상", "아이도 함께"],
+    },
+    {
+      question: "어떤 분위기를?",
+      answers: ["조용", "활기찬", "분위기 예쁜"],
+    },
+  ];
+
+  const answerClick = (ans) => {
+    const newAnswer = { question: survey[num].question, answer: ans };
+    setBind([...bind, newAnswer]);
+
+    if (num + 1 < survey.length) {
+      setNum(num + 1);
+    } else {
+      setSet(true);
+    }
+  };
   return (
     <>
-      <Header />
-      {/*
-      <div>
-        {asdf.lists &&
-          asdf.lists.map((item, index) => {
+      {set ? (
+        <>
+          {bind.map((a, b) => {
             return (
-              <div>
-                <p>{item.creator}</p>
+              <>
+                <Button type="primary" key={b}>
+                  {a.answer}
+                </Button>
+              </>
+            );
+          })}
+        </>
+      ) : (
+        <>
+          {num}
+          {survey.map((item, index) => {
+            if (index !== num) return null;
+            return (
+              <div key={index} className="con-step">
+                <p>{item.question}</p>
+                {item.answers.map((ans, idx) => (
+                  <Button
+                    key={idx}
+                    type="primary"
+                    onClick={() => answerClick(ans)}
+                  >
+                    {ans}
+                  </Button>
+                ))}
               </div>
             );
           })}
-      </div>
-       */}
-
-      <article>
-        <p> 섹션 - 헤더 - 메인 </p>
-        <section className="wrap">
-          <div className="desc">
-            <SummaryWordBox />
-          </div>
-        </section>
-      </article>
+        </>
+      )}
     </>
   );
 };

@@ -8,10 +8,8 @@ import {
 } from "react-router-dom";
 import Asdf from "../Asdf";
 import posts from "../list.json";
-import First from "../pages/First";
 import SignIn from "../pages/SignIn";
 import Routee from "../Routee";
-import Manager from "../routes/Manager";
 import BabyFriendly from "../pages/BabyFriendly";
 {
   /*
@@ -75,35 +73,8 @@ const Header = () => {
           <p className="descHeader">
             이 컨텐츠는 제작자의 혈관, 그리고 통장으로 만들었습니다 :)
           </p>
-          {/*
-          <p>
-            {" "}
-            아이와 함께 가기 좋은 / 혼자서도 좋은 / 풍경이 좋은 / 주류판매하는 /
-            라떼맛집 / 브런치{" "}
-          </p>
-          */}
 
-          <div className="pick-con">
-            <div>
-              <Link to="/babyfriendly">ㅋㅋㅋ응애</Link>
-            </div>
-            <div>
-              <Link to="/">솔로</Link>
-            </div>
-            <div>
-              <Link to="/">뷰</Link>
-            </div>
-            <div>
-              <Link to="/">주류</Link>
-            </div>
-            <div>
-              <Link to="/"></Link>
-            </div>
-            <div>
-              <Link to="/"></Link>
-            </div>
-          </div>
-
+          {/* 
           <div className="search-con">
             <h3>상호명으로 찾기</h3>
 
@@ -112,14 +83,12 @@ const Header = () => {
               <label>췤</label>
             </div>
 
-            <div>
-                
+           <div>
               {state.query === ""
                 ? ""
                 : !state.list.length
                 ? "철자 다시 췍해보삼"
                 : state.list.map((post) => {
-                    // return <p key={post.title}>{post.title} </p>;
                     return (
                       <>
                         <Link to={{ pathname: `/pages/First` }}>
@@ -129,12 +98,10 @@ const Header = () => {
                       </>
                     );
                     {
-                      /* <Link to={{ pathname: `/offline/lesson/view/${record.idx}/${record.programlevel}` }}>View</Link>
-                       */
                     }
                   })}
-            </div>
-          </div>
+            </div> 
+          </div>*/}
         </div>
       </header>
     </>
