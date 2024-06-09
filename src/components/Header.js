@@ -6,34 +6,7 @@ import {
   Route,
   Link,
 } from "react-router-dom";
-import Asdf from "../Asdf";
 import posts from "../list.json";
-import SignIn from "../pages/SignIn";
-import Routee from "../Routee";
-import BabyFriendly from "../pages/BabyFriendly";
-{
-  /*
-const posts = [
-  {
-    url: "",
-    tags: ["z", "d"],
-    title: "asdf"
-  },
-  {
-    url: "",
-    tags: ["zz", "dddd"],
-    title: "2222"
-  },
-  {
-    url: "",
-    tags: ["zz", "dddd"],
-    title: "x"
-  }
-];
-
-https://www.makeuseof.com/react-search-bar-filters-data-create/
-*/
-}
 
 const Header = () => {
   const [state, setstate] = useState({
