@@ -258,3 +258,21 @@ header {
     display: none;
   }
 }
+
+section {
+  &.result-con {
+    height: 400px;
+    width: 100%;
+    border: 1px solid;
+
+    .swiper-slide {
+      height: 500px;
+      background-color: beige;
+    }
+  }
+}
+
+.con-shopinfo {
+  border: 2px solid;
+  margin: 2rem auto;
+}

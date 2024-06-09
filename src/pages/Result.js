@@ -1,55 +1,76 @@
 import React, { useState, useEffect } from "react";
-import { Button, Space, DatePicker, version, Col, Row } from "antd";
+import { Button, Col, Row } from "antd";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
-import { Link, useNavigate } from "react-router-dom";
-
+import shoplist from "./shoplist/shoplist";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-
 import "../style/common.scss";
 
-const Result = (transfer) => {
-  const [set, setSet, bind, setBind] = transfer.transfer;
+const Result = ({ transfer }) => {
+  const [num, setNum, set, setSet, bind, setBind] = transfer;
   const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useState([]);
 
   useEffect(() => {
-    setTimeout((time) => {
-      setSet(true);
+    setTimeout(() => {
+      applyFilters();
       setLoading(false);
-      return () => clearTimeout(time);
     }, 1500);
-  }, [setSet]);
+  }, []);
+
+  const refree = () => {
+    setBind([]);
+    setNum(0);
+    setSet(false);
+  };
+
+  const applyFilters = () => {
+    let filteredList = shoplist;
+
+    bind.forEach(({ answer }) => {
+      filteredList = filteredList.filter(
+        (item) => item.person === answer || item.mood === answer
+      );
+    });
+
+    setFilter(filteredList);
+  };
+
+  const showFilter = (e) => {
+    const mood = e.target.value;
+    const filteredList = shoplist.filter((item) => item.mood === mood);
+    setFilter(filteredList);
+  };
 
   return (
     <>
       {loading ? (
-        <>
-          <h2> 기다려주세요!</h2>;
-        </>
+        <h2>기다려주세요!</h2>
       ) : (
         <>
-          <h1> result </h1>
-          <p>총 n건 찾음</p>
+          <h1>결과</h1>
+          <p>총 {filter.length}건 찾음</p>
           <Row>
             <Col span={18}>
-              {bind.map((a, b) => {
-                return (
-                  <>
-                    <Button type="primary" key={b}>
-                      {a.answer}
-                    </Button>
-                  </>
-                );
-              })}
+              {bind.map((a, b) => (
+                <Button
+                  type="primary"
+                  value={a.answer}
+                  key={b}
+                  onClick={showFilter}
+                >
+                  {a.answer}
+                </Button>
+              ))}
             </Col>
             <Col span={6}>
-              <Button type="primary">다시 선택</Button>
+              <Button type="primary" onClick={refree}>
+                다시 선택
+              </Button>
             </Col>
           </Row>
-
           <section className="result-con">
             <Row>
               <Col span={18}>
@@ -59,14 +80,26 @@ const Result = (transfer) => {
                   pagination={{ clickable: true }}
                   onSlideChange={() => console.log("slide change")}
                 >
-                  <SwiperSlide>Slide 1</SwiperSlide>
-                  <SwiperSlide>Slide 2</SwiperSlide>
-                  <SwiperSlide>Slide 3</SwiperSlide>{" "}
-                  <SwiperSlide>Slide 4</SwiperSlide>
-                  <SwiperSlide>Slide 5</SwiperSlide>
+                  {/* {filter.map((item, idx) => (
+                    <SwiperSlide key={idx}>
+                      <div className="con-shopinfo">ㅇㅇ</div>
+                    </SwiperSlide>
+                  ))} */}
+                  <SwiperSlide>dd</SwiperSlide> <SwiperSlide>dd</SwiperSlide>{" "}
+                  <SwiperSlide>dd</SwiperSlide>
+                  <SwiperSlide>dd</SwiperSlide>
+                  <SwiperSlide>dd</SwiperSlide>
+                  <SwiperSlide>dd</SwiperSlide>
                 </Swiper>
               </Col>
-              <Col span={6}>other</Col>
+              <Col span={6}>
+                {filter.map((item, idx) => (
+                  <div key={idx} className="con-shopinfo">
+                    <h1>{item.person}</h1>
+                    <h1>{item.mood}</h1>
+                  </div>
+                ))}
+              </Col>
             </Row>
           </section>
         </>

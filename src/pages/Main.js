@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Space, DatePicker, version, Col, Row } from "antd";
 import { Link, useNavigate } from "react-router-dom";
-
+import shoplist from "./shoplist/shoplist";
 import Result from "./Result";
 
 import "../style/common.scss";
@@ -40,10 +40,11 @@ const Main = () => {
     }
   };
 
-  const transfer = [set, setSet, bind, setBind];
+  const transfer = [num, setNum, set, setSet, bind, setBind];
 
   return (
     <>
+      {/* {shoplist.filter((item) => item.mood == answer)} */}
       {set ? (
         <>
           <Result transfer={transfer} />
@@ -51,8 +52,15 @@ const Main = () => {
       ) : (
         <>
           {num}
-          {survey.map((item, index) => {
+          <div>{survey[num].question}</div>
+          {survey[num].answers.map((ans, idx) => (
+            <Button key={idx} type="primary" onClick={() => answerClick(ans)}>
+              {ans}
+            </Button>
+          ))}
+          {/* {survey.map((item, index) => {
             if (index !== num) return null;
+
             return (
               <div key={index} className="con-step">
                 <p>{item.question}</p>
@@ -67,7 +75,7 @@ const Main = () => {
                 ))}
               </div>
             );
-          })}
+          })} */}
         </>
       )}
     </>
