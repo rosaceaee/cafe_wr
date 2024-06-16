@@ -3,8 +3,8 @@ const shoplist = [
     personnum: 1,
     person: "혼자",
     mood: "조용",
-    shopName: "calm shop1",
-    shopAddress: "서울특별시 강남구 역삼동",
+    shopName: "calm shop11111",
+    shopInfo: [{ Name: "name" }, { Address: "somewhere" }],
     shopTime: "10:00 ~ 22:00",
     minPrice: "americano 3,000",
   },
@@ -42,7 +42,7 @@ const shoplist = [
     personnum: 1,
     person: "혼자",
 
-    mood: "niceMood",
+    mood: "활기찬",
     shopName: "niceMood shop1",
     shopAddress: "서울특별시 강남구 역삼동",
     shopTime: "10:00 ~ 22:00",
@@ -50,9 +50,9 @@ const shoplist = [
   },
   {
     personnum: 2,
-    person: "세며d",
+    person: "두 명 이상",
 
-    mood: "calm",
+    mood: "활기찬",
     shopName: "calm shop1 - PEOPLE WHO 2",
     shopAddress: "서울특별시 강남구 역삼동",
     shopTime: "10:00 ~ 22:00",

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Button, Col, Row } from "antd";
+import { Button, Col, Row, Switch } from "antd";
 import { Swiper, SwiperSlide } from "swiper/react";
+
 import shoplist from "./shoplist/shoplist";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -38,9 +39,23 @@ const Result = ({ transfer }) => {
     setFilter(filteredList);
   };
 
+  //   const showFilter = (e) => {
+  //     const { mood, person } = e.target.value;
+  //     const filteredList = shoplist.filter(
+  //       (item) => item.mood === mood || item.person === person
+  //     );
+  //     setFilter(filteredList);
+  //   };
   const showFilter = (e) => {
-    const mood = e.target.value;
-    const filteredList = shoplist.filter((item) => item.mood === mood);
+    const value = e.target.value;
+    let filteredList = shoplist;
+
+    if (value) {
+      filteredList = shoplist.filter(
+        (item) => item.person === value || item.mood === value
+      );
+    }
+
     setFilter(filteredList);
   };
 
@@ -50,6 +65,15 @@ const Result = ({ transfer }) => {
         <h2>기다려주세요!</h2>
       ) : (
         <>
+          {" "}
+          <Row>
+            <h3>음주 가능여부</h3>{" "}
+            <Switch
+              checkedChildren="음주가능"
+              unCheckedChildren="일반"
+              defaultChecked
+            />
+          </Row>
           <h1>결과</h1>
           <p>총 {filter.length}건 찾음</p>
           <Row>
@@ -72,35 +96,32 @@ const Result = ({ transfer }) => {
             </Col>
           </Row>
           <section className="result-con">
-            <Row>
-              <Col span={18}>
-                <Swiper
-                  slidesPerView={3}
-                  navigation
-                  pagination={{ clickable: true }}
-                  onSlideChange={() => console.log("slide change")}
-                >
-                  {/* {filter.map((item, idx) => (
+            {filter.map((item, idx) => (
+              <Row style={{ border: "3px solid blue" }}>
+                <Col span={18}>
+                  <Swiper
+                    slidesPerView={3}
+                    navigation
+                    pagination={{ clickable: true }}
+                    onSlideChange={() => console.log("slide change")}
+                  >
                     <SwiperSlide key={idx}>
-                      <div className="con-shopinfo">ㅇㅇ</div>
+                      <div className="con-shopinfo">
+                        <h2>{item.person}</h2>
+                        <h3>{item.mood}</h3>
+                      </div>
                     </SwiperSlide>
-                  ))} */}
-                  <SwiperSlide>dd</SwiperSlide> <SwiperSlide>dd</SwiperSlide>{" "}
-                  <SwiperSlide>dd</SwiperSlide>
-                  <SwiperSlide>dd</SwiperSlide>
-                  <SwiperSlide>dd</SwiperSlide>
-                  <SwiperSlide>dd</SwiperSlide>
-                </Swiper>
-              </Col>
-              <Col span={6}>
-                {filter.map((item, idx) => (
+                  </Swiper>
+                </Col>
+                <Col span={6}>
                   <div key={idx} className="con-shopinfo">
                     <h1>{item.person}</h1>
-                    <h1>{item.mood}</h1>
-                  </div>
-                ))}
-              </Col>
-            </Row>
+                    <h1>{item.mood}</h1> <p>영업 시간: {item.shopTime}</p>
+                    <p>최소 가격: {item.minPrice}</p>
+                  </div>{" "}
+                </Col>
+              </Row>
+            ))}
           </section>
         </>
       )}
