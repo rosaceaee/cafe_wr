@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Col, Row, Switch } from "antd";
+import { HeartFilled } from "@ant-design/icons";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import shoplist from "./shoplist/shoplist";
@@ -12,6 +13,7 @@ import "../style/common.scss";
 const Result = ({ transfer }) => {
   const [num, setNum, set, setSet, bind, setBind] = transfer;
   const [loading, setLoading] = useState(true);
+  const [bookMark, setBookMark] = useState(false);
   const [filter, setFilter] = useState([]);
 
   useEffect(() => {
@@ -59,13 +61,46 @@ const Result = ({ transfer }) => {
     setFilter(filteredList);
   };
 
+  //  BookMark
+  const openBookMark = () => {
+    bookMark ? setBookMark(false) : setBookMark(true);
+  };
+
+  // Use localStorage to add each bookmark
+  const addBookMark = (item) => {
+    const bookmarkList = localStorage.getItem("bookmark") || "[]";
+    const parsedList = JSON.parse(bookmarkList);
+    const newItem = {
+      mood: item.mood,
+      shopName: item.shopName,
+    };
+    const newList = [...parsedList, newItem];
+
+    localStorage.setItem("bookmark", JSON.stringify(newList));
+  };
+
   return (
     <>
       {loading ? (
         <h2>기다려주세요!</h2>
       ) : (
         <>
-          {" "}
+          <Button type="circle" onClick={openBookMark}>
+            <HeartFilled />
+          </Button>
+          {bookMark ? (
+            <div className="wrap-bookmark">
+              <h1>BookMark filteredList</h1>
+              {filter.map((item, idx) => (
+                <div key={idx}>
+                  <p>
+                    {item.name} / {item.person} / {item.mood} / {item.alcohol}
+                  </p>
+                </div>
+              ))}
+            </div>
+          ) : null}
+
           <Row>
             <h3>음주 가능여부</h3>{" "}
             <Switch
@@ -75,7 +110,7 @@ const Result = ({ transfer }) => {
             />
           </Row>
           <h1>결과</h1>
-          <p>총 {filter.length}건 찾음</p>
+          {filter.length > 0 ? <p>{filter.length} 찾음</p> : <p>ㅈㅅ 없네여</p>}
           <Row>
             <Col span={18}>
               {bind.map((a, b) => (
@@ -89,7 +124,10 @@ const Result = ({ transfer }) => {
                 </Button>
               ))}
             </Col>
-            <Col span={6}>
+            <Col span={3}>
+              <Button type="primary">Filter</Button>
+            </Col>
+            <Col span={3}>
               <Button type="primary" onClick={refree}>
                 다시 선택
               </Button>
@@ -103,7 +141,7 @@ const Result = ({ transfer }) => {
                     slidesPerView={3}
                     navigation
                     pagination={{ clickable: true }}
-                    onSlideChange={() => console.log("slide change")}
+                    // onSlideChange={}
                   >
                     <SwiperSlide key={idx}>
                       <div className="con-shopinfo">
@@ -115,6 +153,9 @@ const Result = ({ transfer }) => {
                 </Col>
                 <Col span={6}>
                   <div key={idx} className="con-shopinfo">
+                    <Button type="circle" onClick={() => addBookMark(item)}>
+                      <HeartFilled />
+                    </Button>
                     <h1>{item.person}</h1>
                     <h1>{item.mood}</h1> <p>영업 시간: {item.shopTime}</p>
                     <p>최소 가격: {item.minPrice}</p>
