@@ -1,2 +1,2 @@
 # cafe-meguri
-Created with CodeSandbox
+A private project to find a cafe nearby my location.
