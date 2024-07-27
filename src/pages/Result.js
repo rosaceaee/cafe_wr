@@ -83,7 +83,7 @@ const Result = ({ transfer }) => {
   // scroll evt to result boxes
   useEffect(() => {
     const handleScroll = () => {
-      setHideLogo(window.scrollY > 50);
+      setElemToTop(window.scrollY > 50);
     };
 
     window.addEventListener("scroll", handleScroll);
