@@ -5,18 +5,18 @@ import { Link, useNavigate } from "react-router-dom";
 import shoplist from "./shoplist/shoplist";
 import Result from "./Result";
 
-import "../style/common.scss";
+import "../style/common2.scss";
 
 const Main = () => {
   // const [asdf, setasdf] = useState([]);
   const [num, setNum] = useState(0);
   const [set, setSet] = useState(false);
   const [bind, setBind] = useState([]);
-
+  const [displayAns, setDisplayAns] = useState(null);
   // useEffect(() => {
   //   setTimeout(() => {
   //     setasdf(list);
-  //   }, 1000);
+  //   }, 1500);
   // }, []);
 
   const survey = [
@@ -36,9 +36,18 @@ const Main = () => {
 
     if (num + 1 < survey.length) {
       setNum(num + 1);
+      (num + 1)
     } else {
       setSet(true);
     }
+  };
+
+  // const displayy = (anss) => {
+  //   setDisplayAns(displayAns === anss)
+  // }
+
+  const isAnswerSelected = (ans) => {
+    return displayAns === ans;
   };
 
   const transfer = [num, setNum, set, setSet, bind, setBind];
@@ -46,19 +55,34 @@ const Main = () => {
   return (
     <>
       {/* {shoplist.filter((item) => item.mood == answer)} */}
+      <main>
       {set ? (
         <>
           <Result transfer={transfer} />
         </>
       ) : (
         <>
-          {num}
-          <div>{survey[num].question}</div>
+        <div className="con-survey">
+          <h2>{survey[num].question}</h2>
+          <div className="options">
           {survey[num].answers.map((ans, idx) => (
-            <Button key={idx} type="primary" onClick={() => answerClick(ans)}>
-              {ans}
-            </Button>
+            // <Button key={idx} type="primary" onClick={() => answerClick(ans)}>
+            //   {ans}
+            // </Button>
+
+            <div class="select-cardbox" onClick={() => answerClick(ans)}>
+             <div class="eff">
+               {ans}</div>
+              </div>
           ))}
+{/* 
+          {bind.length > 0 && (bind.map((a,b) => {
+            console.log(a.answer)
+          }))} */}
+          </div>
+
+         
+          </div>
           {/* {survey.map((item, index) => {
             if (index !== num) return null;
 
@@ -79,6 +103,8 @@ const Main = () => {
           })} */}
         </>
       )}
+      </main>
+      
     </>
   );
 };

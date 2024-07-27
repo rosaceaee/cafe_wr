@@ -1,0 +1,105 @@
+@import "./font.scss";
+$bg-beige: #cc8b86;
+$bg-beige2: #f9eae1;
+$bg-beige3: #7d4f50;
+$bg-beige4: #d1be9c;
+$bg-beige5: #aa998f;
+$bg-fff: #fff;
+$blue: #00a8e8;
+
+.asdf {
+  border: 3px solid orange;
+}
+main {
+  border: 2px solid magenta;
+  background: beige;
+  .con-survey {
+    background: beige;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    h2 {
+      font-size: 2rem;
+    }
+
+    .options {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      width: 100%;
+      button {
+        padding: 1.25rem;
+        span {
+          font-size: 1.3rem;
+        }
+      }
+    }
+  }
+
+  .select-cardbox {
+    border: 1px solid;
+    border-radius: 1rem;
+    padding: 10px 20px;
+    max-width: 200px;
+    width: 100%;
+    transition: all 0.3s ease;
+    position: relative;
+    .eff {
+      width: 100%;
+    }
+
+    &:hover {
+      width: 100%;
+      cursor: pointer;
+      .eff {
+        content: " ";
+        left: 0;
+        padding: 10px 20px;
+
+        top: 0;
+        width: 100%;
+        background: rgb(161, 113, 24);
+        transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1); /* ease-in-out */
+        transition-timing-function: cubic-bezier(
+          0.42,
+          0,
+          0.58,
+          1
+        ); /* ease-in-out */
+      }
+      &:after {
+      }
+      p {
+        transition: all 0.3s ease;
+        color: red;
+        font-weight: 600;
+        z-index: 2;
+      }
+    }
+  }
+}
+
+section {
+  &.result-con {
+    .result-box {
+      background: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      border: 1px solid;
+
+      .filtered-wrap {
+        display: flex;
+        gap: 1rem;
+
+        h1 {
+          padding: 10px 20px;
+        }
+      }
+    }
+  }
+}
+
+// animation area
