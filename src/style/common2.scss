@@ -50,6 +50,7 @@ main {
     position: relative;
     .eff {
       width: 100%;
+      padding: 10px 10px;
     }
 
     &:hover {
@@ -62,6 +63,7 @@ main {
 
         top: 0;
         width: 100%;
+        color: #fff;
         background: rgb(161, 113, 24);
         transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1); /* ease-in-out */
         transition-timing-function: cubic-bezier(
@@ -75,7 +77,6 @@ main {
       }
       p {
         transition: all 0.3s ease;
-        color: red;
         font-weight: 600;
         z-index: 2;
       }
@@ -100,6 +101,11 @@ section {
       }
     }
   }
+}
+
+.loading-con {
+  width: 100%;
+  display: flex;
 }
 
 // animation area

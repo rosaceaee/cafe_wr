@@ -13,9 +13,9 @@ import "../style/common.scss";
 const Result = ({ transfer }) => {
   const [num, setNum, set, setSet, bind, setBind] = transfer;
   const [loading, setLoading] = useState(true);
-  const [bookMark, setBookMark] = useState(false);
   const [elemToTop, setElemToTop] = useState(false);
   const [filter, setFilter] = useState([]);
+  const [bookMark, setBookMark] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
@@ -83,7 +83,7 @@ const Result = ({ transfer }) => {
   // scroll evt to result boxes
   useEffect(() => {
     const handleScroll = () => {
-      setElemToTop(window.scrollY > 50);
+      setElemToTop(window.scrollY > 100);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -93,45 +93,45 @@ const Result = ({ transfer }) => {
     <>
       {loading ? (
         <div className="loading-con">
-          <div>
+          {/* <div>
             <p>선택 확인 문구</p>
             {bind.length > 0 && (
               <ul>
                 {bind.map((item, idx) => (
-                  <li key={idx}>{item.answer}</li>
+                  <li key={idx}> asdfasdf{item.answer}</li>
                 ))}
               </ul>
             )}
           </div>
 
-          <h2>기다려주세요!</h2>
+          <h2>기다려주세요!</h2> */}
         </div>
       ) : (
         <>
-          <article class={loading ? "" : "asdf"}>
-            <Button type="circle" onClick={openBookMark}>
-              <HeartFilled />
-            </Button>
-            {bookMark ? (
-              <div className="wrap-bookmark">
-                <h1>BookMark filteredList</h1>
-                {filter.map((item, idx) => (
-                  <div key={idx}>
-                    <p>
-                      {item.name} / {item.person} / {item.mood} / {item.alcohol}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            ) : null}
-
+          <article>
             <Row>
-              <h3>음주 가능여부</h3>{" "}
+              <h3>음주 가능여부</h3>
               <Switch
                 checkedChildren="음주가능"
                 unCheckedChildren="일반"
                 defaultChecked
               />
+              <Button type="circle" onClick={() => openBookMark()}>
+                <HeartFilled />
+              </Button>
+              {bookMark ? (
+                <div className="wrap-bookmark">
+                  <h1>BookMark filteredList</h1>
+                  {filter.map((item, idx) => (
+                    <div key={idx}>
+                      <p>
+                        {item.name} / {item.person} / {item.mood} /
+                        {item.alcohol}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              ) : null}
             </Row>
             <h1>결과</h1>
             {filter.length > 0 ? (
@@ -141,7 +141,7 @@ const Result = ({ transfer }) => {
             )}
             <Row>
               <Col span={18}>
-                {bind.map((a, b) => (
+                {/* {bind.map((a, b) => (
                   <Button
                     type="primary"
                     value={a.answer}
@@ -150,7 +150,7 @@ const Result = ({ transfer }) => {
                   >
                     {a.answer}
                   </Button>
-                ))}
+                ))} */}
               </Col>
               <Col span={3}>
                 <Button type="primary">Filter</Button>
@@ -163,7 +163,7 @@ const Result = ({ transfer }) => {
             </Row>
             <section className="result-con">
               {filter.map((item, idx) => (
-                <Row className={elemToTop ? "result-con" : "asdf"}>
+                <Row className={elemToTop ? "asdf" : ""}>
                   <Col span={18}>
                     <Swiper
                       slidesPerView={3}
@@ -200,7 +200,7 @@ const Result = ({ transfer }) => {
 
                       <p>영업 시간: {item.shopTime}</p>
                       <p>최소 가격: {item.minPrice}</p>
-                    </div>{" "}
+                    </div>
                   </Col>
                 </Row>
               ))}
